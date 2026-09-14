@@ -1,2 +1,10 @@
-# shadowrocket-rules
-Personal Shadowrocket split-routing profiles
+# Shadowrocket 远程规则
+
+两个配置均依赖现有 3X-UI 节点订阅；**先刷新节点订阅**，再在 Shadowrocket 的「配置」中添加其中一个链接并启用。
+
+- `overseas-to-china.conf`：海外使用。常见大陆视频、音乐、支付、电商走 `上海阿里｜回国直连`；其他流量直连。
+- `china-to-global.conf`：中国大陆使用。大陆 IP/局域网直连，其余流量走 `上海腾讯｜日本出口`。
+
+配置里引用的是节点显示名。若将来改节点名称，需要同步改这里的名称。
+
+不包含节点地址、订阅 token 或任何凭据。

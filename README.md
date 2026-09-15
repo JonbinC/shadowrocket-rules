@@ -1,44 +1,47 @@
-# Shadowrocket 远程规则
+# Shadowrocket / Clash 远程规则
 
-核心域名/IP 跟随 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)。本仓库只维护**策略映射**到 3X-UI 节点名。
+核心域名/IP 跟随 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 与 [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)。  
+**推荐用 `vpn.mdtero.com` 镜像**（国内可达，不直连 GitHub）。
 
 ## 先分清你在哪
 
-| 你人在 | 客户端 | 用什么 | 不要用 |
-|--------|--------|--------|--------|
-| **国内**（翻墙） | Clash Meta | 面板 Clash 订阅 `/c-...`（已内嵌国内向规则） | 不要把「回国」当默认节点 |
-| **国内**（翻墙） | 小火箭 | 节点订阅 `/s-...` + 本仓库 `china-to-global.conf` | 不要用 `overseas-to-china.conf` |
-| **海外**（回国） | 小火箭 | 节点订阅 `/s-...` + 本仓库 `overseas-to-china.conf` | 不要开「全局」硬选回国；不要用 Clash 默认规则指望回国 |
-| **海外**（回国） | Clash Meta | 手动选「回国」节点访问国内站，或自建回国规则 | 面板 Clash 默认是**国内翻墙向**（CN→直连），不适合海外回国 |
+| 你人在 | 客户端 | 用什么 |
+|--------|--------|--------|
+| **国内**翻墙 | Clash Meta | 面板 Clash 订阅：`/c-...` |
+| **国内**翻墙 | 小火箭 | 节点 `/s-...` + 下面「国内翻墙」规则 URL |
+| **海外**回国 | Clash Meta | 把订阅里的 `/c-` **改成 `/co-`**（其余路径不变） |
+| **海外**回国 | 小火箭 | 节点 `/s-...` + 下面「海外回国」规则 URL |
 
-人在海外却启用了「国内翻墙」规则时：国内域名会被 **DIRECT**（当地直连），选「回国」节点也进不去国内站。
+## 规则 URL（走 vpn.mdtero.com）
+
+### 小火箭
+
+- 国内翻墙：`https://vpn.mdtero.com/rules/china-to-global.conf`
+- 海外回国：`https://vpn.mdtero.com/rules/overseas-to-china.conf`
+
+### Clash
+
+- 国内：订阅原样 `/c-<token>/<subId>`（规则已镜像到本域）
+- 海外：`/co-<token>/<subId>`（自动改成：中国流量 → `上海阿里｜回国直连`，其余直连）
+
+GitHub raw 仍可用，但国内可能很慢：
+
+- `https://raw.githubusercontent.com/JonbinC/shadowrocket-rules/main/china-to-global.conf`
+- `https://raw.githubusercontent.com/JonbinC/shadowrocket-rules/main/overseas-to-china.conf`
 
 ## 小火箭步骤
 
-1. 刷新 3X-UI 节点订阅，并删除旧节点。需要至少有：
-   - `上海阿里｜回国直连`
-   - `上海阿里｜日本出口`
-2. 小火箭 → 配置 → 添加对应 `.conf` 的 raw URL → 启用。
-3. **底部选「配置」**（不要「全局」）。两份配置不要同时启用。
-
-### 配置 URL
-
-- 海外回国：  
-  `https://raw.githubusercontent.com/JonbinC/shadowrocket-rules/main/overseas-to-china.conf`
-- 国内翻墙：  
-  `https://raw.githubusercontent.com/JonbinC/shadowrocket-rules/main/china-to-global.conf`
+1. 刷新节点订阅，确认有 `上海阿里｜回国直连`、`上海阿里｜日本出口`
+2. 配置 → 添加对应 conf URL → 启用
+3. 底部选「配置」（不要「全局」）
 
 ## 策略说明
 
-- `overseas-to-china.conf`：中国大陆域名/IP、B站、腾讯视频、爱奇艺、网易云、微信 → `上海阿里｜回国直连`；其余 **直连**。
-- `china-to-global.conf`：广告拒绝；中国大陆/局域网直连；全球与未知流量 → `上海阿里｜日本出口`。
+- 海外回国：中国站/影音/微信 → `上海阿里｜回国直连`；其余直连
+- 国内翻墙：中国/局域网直连；其余 → `上海阿里｜日本出口`
 
-## 关于「回国节点 Timeout」
+## 关于 Timeout
 
-小火箭测延迟常走 Google。回国出口访问 Google 会被墙，**延迟球 Timeout 不代表节点挂了**。以百度/淘宝/微信能否打开为准。
+回国节点测延迟常走 Google，Timeout **不代表挂了**。以百度/微信为准。
 
-## 上游与边界
-
-`ChinaMax` 体积较大但覆盖完整。广告规则里少量 `URL-REGEX` 需 MITM；本配置不启用 MITM。
-
-本仓库不含节点地址、订阅 token 或凭据。
+本仓库不含节点地址或订阅 token。

@@ -1,23 +1,42 @@
 # Shadowrocket 远程规则
 
-这两份配置不再维护手写域名清单；核心覆盖跟随 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script) 的原生 Shadowrocket 规则集更新。此仓库只维护**策略映射**到你的 3X-UI 节点名。
+核心域名/IP 跟随 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)。本仓库只维护**策略映射**到 3X-UI 节点名。
 
-## 使用前提
+## 先分清你在哪
 
-先刷新 3X-UI 节点订阅，确保以下节点名存在：
+| 你人在 | 用哪份配置 | 不要用 |
+|--------|------------|--------|
+| **海外**（要看国内站 / 微信 / B站） | `overseas-to-china.conf` | 不要开「全局」硬选回国；不要用国内翻墙那份 |
+| **国内**（要翻墙） | `china-to-global.conf` | 不要用海外回国那份 |
 
-- `上海阿里｜回国直连`
-- `上海腾讯｜日本出口`
+人在海外却启用了「国内翻墙」规则时：国内域名会被 **DIRECT**（英国直连），国外域名走代理——选「回国」节点也进不去国内站，体感就像分流坏了。
 
-再在 Shadowrocket 的「配置」添加对应 `.conf` URL 并启用。不要同时启用两份配置。
+## 使用步骤
 
-## 配置
+1. 刷新 3X-UI 节点订阅，并删除旧节点。需要至少有：
+   - `上海阿里｜回国直连`
+   - `上海阿里｜日本出口`
+2. 小火箭 → 配置 → 添加对应 `.conf` 的 raw URL → 启用。
+3. **底部选「配置」**（不要「全局」）。两份配置不要同时启用。
 
-- `overseas-to-china.conf`：海外回国。中国大陆域名/IP、B站、腾讯视频、爱奇艺、网易云音乐 → `上海阿里｜回国直连`；其他流量直连。
-- `china-to-global.conf`：中国大陆翻墙。广告拦截，中国大陆/局域网直连，全球服务和未知流量 → `上海腾讯｜日本出口`。
+### 配置 URL
+
+- 海外回国：  
+  `https://raw.githubusercontent.com/JonbinC/shadowrocket-rules/main/overseas-to-china.conf`
+- 国内翻墙：  
+  `https://raw.githubusercontent.com/JonbinC/shadowrocket-rules/main/china-to-global.conf`
+
+## 策略说明
+
+- `overseas-to-china.conf`：中国大陆域名/IP、B站、腾讯视频、爱奇艺、网易云、微信 → `上海阿里｜回国直连`；其余 **直连**。
+- `china-to-global.conf`：广告拒绝；中国大陆/局域网直连；全球与未知流量 → `上海阿里｜日本出口`。
+
+## 关于「回国节点 Timeout」
+
+小火箭测延迟常走 Google。回国出口访问 Google 会被墙，**延迟球 Timeout 不代表节点挂了**。以百度/淘宝/微信能否打开为准。
 
 ## 上游与边界
 
-`ChinaMax` 规则集较大，换来更完整的域名/IP/应用覆盖。广告规则中少量 `URL-REGEX` 需要 MITM 才能生效；本配置不启用 MITM，因此不会解密 HTTPS。
+`ChinaMax` 体积较大但覆盖完整。广告规则里少量 `URL-REGEX` 需 MITM；本配置不启用 MITM。
 
-此仓库不包含节点地址、订阅 token 或任何凭据。
+本仓库不含节点地址、订阅 token 或凭据。

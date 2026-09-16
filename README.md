@@ -1,4 +1,4 @@
-# 煎饼传送门 · JB Transit — 远程规则
+# 彼岸 · Beyond — 远程规则
 
 **推荐全部用 `vpn.mdtero.com` 镜像**（国内可达，不直连 GitHub）。
 

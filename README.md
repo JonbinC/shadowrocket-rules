@@ -1,6 +1,6 @@
-# Shadowrocket / Clash 远程规则
+# 煎饼传送门 · JB Transit — 远程规则
 
-**推荐全部用 `vpn.mdtero.com` 镜像**（国内可达）。
+**推荐全部用 `vpn.mdtero.com` 镜像**（国内可达，不直连 GitHub）。
 
 ## 先分清你在哪
 
@@ -10,6 +10,18 @@
 | **国内**翻墙 | 小火箭 | 节点 `/s-...` + `https://vpn.mdtero.com/rules/china-to-global.conf` |
 | **海外**回国 | Clash Meta | 把 `/c-` 改成 `/co-` |
 | **海外**回国 | 小火箭 | 节点 `/s-...` + `https://vpn.mdtero.com/rules/overseas-to-china.conf` |
+
+## 节点名（与订阅一致）
+
+- 🇯🇵 东京 · IX
+- 🇸🇬 新加坡
+- 🇺🇸 美西
+- 🇨🇳 回国 · 阿里
+- 🇯🇵 东京 · IX 备用
+- 🇨🇳 回国 · 腾讯
+- 🇯🇵 东京 · 直连
+
+国内默认走 **东京 · IX**；海外回国默认走 **回国 · 阿里**。
 
 ## 点评/美团说明
 

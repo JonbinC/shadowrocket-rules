@@ -6,7 +6,7 @@
 
 | 你人在 | 客户端 | 用什么 |
 |--------|--------|--------|
-| **国内**翻墙 | Clash Meta | `/c-...` 订阅（点评/美团已强制直连） |
+| **国内**翻墙 | Clash Meta | `/c-...` 订阅 |
 | **国内**翻墙 | 小火箭 | 节点 `/s-...` + `https://vpn.mdtero.com/rules/china-to-global.conf` |
 | **海外**回国 | Clash Meta | 把 `/c-` 改成 `/co-` |
 | **海外**回国 | 小火箭 | 节点 `/s-...` + `https://vpn.mdtero.com/rules/overseas-to-china.conf` |
@@ -28,10 +28,9 @@
 - Clash `/c-`：`PROXY` 分组包含你开通的全部节点，默认第一个。
 - Clash `/co-`：`🇨🇳 回国` 分组默认阿里，可切腾讯；没开回国节点时为直连。
 
-## 点评/美团说明
+## 规则来源
 
-大众点评、美团域名常解析到**新加坡/香港 CDN**，不在中国 IP 库里。若走代理出口，国内版 App/网站会打不开。  
-国内规则（小火箭 china-to-global.conf、Clash `/c-`）已把相关域名**强制直连**；请用**规则模式**，不要开「全局代理」。
+规则全部直接使用 GitHub 上的成熟规则集，不做自定义：小火箭用 [blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)，Clash 用 [Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)，由 `vpn.mdtero.com` 每日同步镜像。请用**规则模式**，不要开「全局代理」。
 
 ## 小火箭步骤
 
